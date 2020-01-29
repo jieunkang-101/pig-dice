@@ -6,37 +6,48 @@ function Player(name) {
 
 Player.prototype.updateScore = function() {
   this.totalScore += currentScore;
-  return this.totalScore;
+  this.totalScore;
 }
 
 // user interface logic
 var currentScore = 0;
 var turn = 0;
-var player1 = new Player($("#player1"));
-var player2 = new Player($("#player2"));
-console.log(player1);
+var player1name = $("input#player1").val();
+var player1 = "";
+var player2 = "";
+//console.log(player1);
 
 $(document).ready(function() {
-  // $("#starBtn").submit(function(event) {
-    //   event.preventDefault();
-    
-    // });
+  $("#form1").submit(function(event) {
+    event.preventDefault();
+    player2 = new Player($("input#player2").val());
+    console.log(player2.name);
+    $("#player1name").html(player1.name);
+    $("#player2name").text(player2.name);
+  
+  });
     
   $("#rollBtn").click(function(event) {
     event.preventDefault();
     var diceNum = Math.floor(Math.random()*6 +1);
-  $(".dice-number").text(diceNum);
+    $(".dice-number").text(diceNum);
     if (diceNum !== 1) {
       currentScore += diceNum;
       $(".current-score").text(currentScore);
-    } else {
-      currentScore = 0;
-      // turn = 1;
-    }
+      $("#holdBtn").click(function(event) {
+        event.preventDefault(); 
+
+        player2.totalScore += currentScore;
+        $(".total-score").text(player2.totalScore);
+        currentScore = 0;
+    });
+  } else {
+    currentScore = 0;
+    return player2.totalScore;
+
+    // turn = 1;
+  }
   });
 
-  $("#holdBtn").click(function(event) {
-    event.preventDefault();
-    $(".total-score").text(player1.updateScore());
-  });
+
 });
