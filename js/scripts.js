@@ -6,6 +6,7 @@ function Player(name) {
 
 Player.prototype.updateScore = function() {
   this.totalScore += currentScore;
+  return this.totalScore;
 }
 
 // user interface logic
@@ -20,22 +21,22 @@ $(document).ready(function() {
     //   event.preventDefault();
     
     // });
-      
+    
   $("#rollBtn").click(function(event) {
+    event.preventDefault();
     var diceNum = Math.floor(Math.random()*6 +1);
-    $(".dice-number").text(diceNum);
-      event.preventDefault();
-      if (diceNum !== 1) {
-        currentScore += diceNum;
-        $(".current-score").text(currentScore);
-      } else {
-        currentScore = 0;
-        turn = 1;
-      }
-
+  $(".dice-number").text(diceNum);
+    if (diceNum !== 1) {
+      currentScore += diceNum;
+      $(".current-score").text(currentScore);
+    } else {
+      currentScore = 0;
+      // turn = 1;
+    }
   });
 
-
-
-
+  $("#holdBtn").click(function(event) {
+    event.preventDefault();
+    $(".total-score").text(player1.updateScore());
+  });
 });
