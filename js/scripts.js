@@ -3,6 +3,7 @@ function Player(name) {
   this.name = name;
   this.currentScore = 0;
   this.totalScore = 0;
+  this.turn = 0;
 }
 
 var diceNum = Math.floor(Math.random() * 6 + 1);
@@ -23,11 +24,9 @@ Player.prototype.checkWinner = function() {
 
 // user interface logic
 var currentScore = 0;
-var turn = 0;
+// var turn = 0;
 var player1 = new Player();
 var player2 = new Player();
-
-
 
 $(document).ready(function () {
   $("#form1").submit(function(event) {
@@ -58,7 +57,17 @@ $(document).ready(function () {
     $("#player1-total-score").text(player1.totalScore);
     player1.checkWinner();
   });
+
+  $("#restartBtn").click(function(event){
+    event.preventDefault();
+    var diceNum = 0;
+    var currentScore = 0;
+    var totalScore = 0;
+    $("input#player1").val("");
+    $("input#player2").val("");
+    $("#player1-dice").text(diceNum);
+    $("#player1-current-score").text(currentScore);
+    $("#player1-total-score").text(totalScore);
+  });
+
 });
-
-
-
