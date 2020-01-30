@@ -41,10 +41,7 @@ $(document).ready(function () {
       player1.getCurrentScore(diceNum);
       $("#player1-current-score").text(player1.currentScore);
     } else {
-      currentScore = 0;
-      player1.getCurrentScore(diceNum);
-      player1.getTotalScore(currentScore);
-      $("#player1-current-score").text(player1.currentScore);
+      player1.currentScore = 0;
       $("#player1-total-score").text(player1.totalScore);
     }
   });
